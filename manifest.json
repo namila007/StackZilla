@@ -1,0 +1,27 @@
+{
+
+    "description": "Eazy access for your StackOverflow account",
+    "manifest_version": 2,
+    "name": "StackZilla",
+    "version": "1.0",
+    "homepage_url": "https://github.com/namila007/StackZilla",
+    "icons": {
+        "64": "icons/addon.png"
+      },
+    "permissions": [
+    "activeTab"
+    ],
+    "browser_action": {
+        "default_icon": "icons/toolbar.png",
+        "default_title": "StackZilla",
+        "default_popup": "popup/index.html"
+      },
+
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["stackzilla.js"]
+      }
+    ]
+  
+  }
