@@ -1,3 +1,35 @@
-<html  >
-    Hello
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="index.css"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.stackexchange.com">
+  </head>
+
+<body>
+  <div id="popup-content row">
+    <div class="token">
+        <button type="button" id="tokenbtn">Get Token</button> 
+    </div>
+
+    <div class="token" id="token"></div>
+
+    <div class="col user">
+
+    </div>
+    
+  </div>
+  <div id="error-content" class="hidden">
+    <p>Can't beastify this web page.</p><p>Try a different page.</p>
+  </div>
+
+  
+
+  <script type='text/javascript' src="scripts/jquery-3.3.1.min.js"></script>
+  <script type='text/javascript' src='../background/all.js'></script>
+  <script src="stackpopup.js"></script>
+</body>
+
+
 </html>
