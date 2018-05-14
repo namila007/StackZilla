@@ -17,13 +17,17 @@
     </div>
   </div>
 
-  <div class="row" id="main_inbox" hidden>
-    <button type="button" class="btn btn-primary" id="showinbox">
-        Inbox <span class="badge badge-light" id="inboxcount"></span>
-        <span class="sr-only">messages</span>
+  <div class="row" id="main_inbox" >
+    <div class="col-12">
+      <button type="button" class="btn btn-primary" id="showinboxbtn">
+          Inbox <span class="badge badge-light" id="unreadinboxcount"></span>
+          <span class="sr-only">Unread Messages</span>
       </button>
-
-    <ul id="inbox" hidden></ul>
+    </div>
+    <div class="col-12">
+        <ul id="inbox" style="visibility: hidden;"></ul>
+    </div>
+   
   </div>
 
 </div>

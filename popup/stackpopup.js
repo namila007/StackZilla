@@ -30,9 +30,19 @@ document.getElementById('tokenbtn').addEventListener("click", async function get
     command: "tokenurl" , 
     data: tokenurl })
     token.then(handleResponse,handleError)
+   
 
 })
 
+document.getElementById('showinboxbtn').addEventListener("click",()=>{
+    console.log("clicked")
+    var inbox = document.getElementById("inbox")
+    if(inbox.style.visibility == 'hidden') {
+        inbox.style.visibility = 'visible'
+    }else {
+        inbox.style.visibility = 'hidden'
+    }
+})
 
 function handleinbox(message) {
     console.log("Inbox")
@@ -41,13 +51,23 @@ function handleinbox(message) {
  
    
     var inbox = document.getElementById("inbox")
-
+    
+    var unreadcount = 0
     for (var i=0; i<msg.items.length; i++){
-       var item = document.createElement('li')
+        if(msg.items[i].is_unread === true) unreadcount++
+        var item = document.createElement('li')
         item.innerHTML =
         '<a href="'+ msg.items[i].link +'">' + msg.items[i].title + '</a>'
         inbox.appendChild(item)
     }
+    var unread = document.getElementById("unreadinboxcount")
+    unread.innerHTML = unreadcount
+    browser.notifications.create({
+        "type": "basic",
+        "iconUrl": browser.extension.getURL("icons/addon.png"),          
+        "title": "Inbox",
+        "message": "You have "+unreadcount+" unread messages"
+      })
     
    
 }

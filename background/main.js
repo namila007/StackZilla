@@ -3,7 +3,7 @@
 var token
 
 const INBOX_READ =
-`https://api.stackexchange.com/2.2/me/inbox?page=1&pagesize=3&key=${KEY}&site=stackoverflow&filter=!LURAJLCc5nUZDmmWGEXuwH`
+`https://api.stackexchange.com/2.2/me/inbox?page=1&pagesize=5&key=${KEY}&site=stackoverflow&filter=!LURAJLCc5n-3UL-M6AmXYq`
 
 //error log function
 function logError(error) {
@@ -23,6 +23,7 @@ function recivemessage (message,sender,sendResponse){
     }).then(()=>{
       browser.notifications.create({
         "type": "basic",
+        "iconUrl": browser.extension.getURL("icons/addon.png"),
         "title": "Token Created",
         "message": "Token is created"
       })
@@ -31,10 +32,13 @@ function recivemessage (message,sender,sendResponse){
   }
     if(message.command == "inbox") {
       var url = INBOX_READ+`&access_token=${message.token}`
-      var msg = get(url, (msg1)=>{
-        console.log(msg1)
+      get(url, (msg1)=>{
+        //console.log(msg1)
+        
         sendResponse({response: msg1})
       })
+        
+      }
       
       
       return true
@@ -43,9 +47,6 @@ function recivemessage (message,sender,sendResponse){
     
     function get(url, callback){
       var xmlHttp =  new XMLHttpRequest();
-      // xmlHttp.open( "GET", url, false ); // false for synchronous request
-      // xmlHttp.send( null );
-      // return xmlHttp.responseText;
       xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             callback(xmlHttp.responseText);
@@ -56,9 +57,6 @@ function recivemessage (message,sender,sendResponse){
     
     // return true
     
-  
-  
-}
 
 
 
