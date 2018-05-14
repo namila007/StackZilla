@@ -10,12 +10,14 @@ const AUTH_URL =
 //&scope=${encodeURIComponent(SCOPES.join(' '))}`;
 
 
-browser.runtime.onMessage.addListener((message) => {
-    console.log(message + " mess")
-    if (message.command === "token") {
-      tokenSet(message.token);
-    } 
-  });
+function handleResponse(message) {
+    console.log(`background script sent a response: ${message.response}`);
+  }
+  
+  function handleError(error) {
+    console.log(`Error: ${error}`);
+  }
+
 
 document.getElementById('tokenbtn').addEventListener("click", async function getToken () {
    
@@ -23,7 +25,11 @@ document.getElementById('tokenbtn').addEventListener("click", async function get
     interactive: true,
     url: AUTH_URL
   })
-  browser.runtime.sendMessage({url: tokenurl});
+  var token = browser.runtime.sendMessage({
+    command: "tokenurl" , 
+    data: tokenurl })
+    token.then(handleResponse,handleError)
+
 })
 
 function tokenSet (req) {

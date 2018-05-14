@@ -63,10 +63,3 @@ function validate(redirectURL) {
 }
 
 
-
-/**
-Authenticate and authorize using browser.identity.launchWebAuthFlow().
-If successful, this resolves with a redirectURL string that contains
-an access token.
-*/
-
