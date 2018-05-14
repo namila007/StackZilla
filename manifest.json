@@ -1,5 +1,5 @@
 {
-  "description": "Eazy access for your StackOverflow account",
+  "description": "Eazy access to your StackOverflow account",
   "manifest_version": 2,
   "name": "StackZilla",
   "version": "1.0",
@@ -11,14 +11,12 @@
     "permissions": [
       "notifications",
       "identity",
-      "tabs",
-      "activeTab",
       "*://api.stackexchange.com/*",
       "*://*.stackoverflow.com/*"
     ],
     "applications": {
       "gecko": {
-        "id": "stackzilla1@mozilla.org"
+        "id": "stackzilla2@mozilla.org"
       }
     },
     "browser_action": {
@@ -29,7 +27,6 @@
       "background": {
         "scripts": [
           "background/authorize.js",
-          "background/userinfo.js",
           "background/main.js"
         ]
       },
