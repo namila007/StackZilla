@@ -1,13 +1,13 @@
 /* exported getAccessToken */
 
-const REDIRECT_URL = browser.identity.getRedirectURL();
-const CLIENT_ID = "12428";
+// const REDIRECT_URL = browser.identity.getRedirectURL();
+// const CLIENT_ID = "12428";
 const KEY = "f26RUH3uoCiokrEYNeDf9Q(("
-const SCOPES = ["read_inbox", "noexpire"];
-const AUTH_URL =
-`https://stackoverflow.com/oauth/dialog?
-client_id=${CLIENT_ID}&key=${KEY}&redirect_uri=${encodeURIComponent(REDIRECT_URL)}
-&scope=${encodeURIComponent(SCOPES.join(' '))}`;
+// const SCOPES = ["read_inbox", "noexpire"];
+// const AUTH_URL =
+// `https://stackoverflow.com/oauth/dialog?
+// client_id=${CLIENT_ID}&key=${KEY}&redirect_uri=${encodeURIComponent(REDIRECT_URL)}
+// &scope=${encodeURIComponent(SCOPES.join(' '))}`;
 
 const VALIDATION_BASE_URL="https://api.stackexchange.com/2.2/";
 
@@ -33,11 +33,13 @@ it seems to be "aud".
 */
 function validate(redirectURL) {
   const accessToken = extractAccessToken(redirectURL);
-  console.log(accessToken+ "access")
+  console.log(accessToken + " access")
   if (!accessToken) {
     throw "Authorization failure";
   }
-  const validationURL = `${VALIDATION_BASE_URL}access_tokens/${accessToken}`;
+  const validationURL = `${VALIDATION_BASE_URL}access-tokens/${accessToken}?key=${KEY}`;
+
+  console.log(validationURL)
   const validationRequest = new Request(validationURL, {
     method: "GET"
   });
@@ -60,19 +62,11 @@ function validate(redirectURL) {
   return fetch(validationRequest).then(checkResponse);
 }
 
+
+
 /**
 Authenticate and authorize using browser.identity.launchWebAuthFlow().
 If successful, this resolves with a redirectURL string that contains
 an access token.
 */
-function authorize() {
-  console.log(AUTH_URL)
-  return browser.identity.launchWebAuthFlow({
-    interactive: true,
-    url: AUTH_URL
-  });
-}
 
-function getAccessToken() {
-  return authorize()
-}
