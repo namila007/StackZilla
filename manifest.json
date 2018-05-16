@@ -16,21 +16,22 @@
     ],
     "applications": {
       "gecko": {
-        "id": "stackzilla2@mozilla.org"
+        "id": "stackzilla5@mozilla.org"
       }
     },
     "browser_action": {
         "default_icon": "icons/toolbar.png",
         "default_title": "StackZilla",
-        "default_popup": "popup/index.html"
+        "browser_style": true
       },
       "background": {
         "scripts": [
           "background/authorize.js",
-          "background/main.js"
+          "background/main.js",
+          "background/inboxInfo.js",
+          "background/notificationInfo.js"
         ]
       },
-
     "content_scripts": [
       {
         "matches": ["*://*/*"],

@@ -1,6 +1,13 @@
 /* exported getAccessToken */
 
+const REDIRECT_URL = browser.identity.getRedirectURL();
+const CLIENT_ID = "12428";
 const KEY = "f26RUH3uoCiokrEYNeDf9Q(("
+const SCOPES = ["read_inbox"];
+const AUTH_URL =
+`https://stackoverflow.com/oauth/dialog?client_id=${CLIENT_ID}&key=${KEY}&redirect_uri=${REDIRECT_URL}&scope=${encodeURIComponent(SCOPES.join(' '))}`;
+
+
 
 const VALIDATION_BASE_URL="https://api.stackexchange.com/2.2/";
 
@@ -44,3 +51,13 @@ function validate(redirectURL) {
 }
 
 
+async function authorize() {
+  return await browser.identity.launchWebAuthFlow({
+    interactive: true,
+    url: AUTH_URL
+  });
+}
+
+function getAccessToken() {
+  return authorize().then(validate);
+}
