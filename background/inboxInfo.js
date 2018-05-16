@@ -13,19 +13,22 @@ function unreadmessages(token){
   var url = INBOX_READ+`&access_token=${token}`
     console.log(url)
 
-   return new Promise((resolve,reject)=>{
-        get(url, (msg1)=>{ 
-            if(msg1.error_message){ resolve("Error: "+msg1.error_message)}
-            console.log(msg1)
-            let msg = JSON.parse(msg1)  
-            console.log(msg.items.length) 
-            if(totunread < msg.items.length ){
-                notifyunread(msg.items.length)
-                totunread = msg.items.length
-                resolve(msg.items.length)
-            } 
-        })
-        })
+  return axios.get(url).then(res=>{
+    console.log(totunread+" "+res.data.items.length )
+    console.log(res.data)
+    if(totunread < res.data.items.length )
+    {
+      totunread = res.data.items.length
+      console.log(totunread+" "+res.data.items.length )
+      return Promise.resolve(res.data.items.length)
+    }
+    if(totunread == res.data.items.length ){
+      console.log(totunread+" "+res.data.items.length )
+      return Promise.resolve(-1)
+    }
+    throw new Error('Error occured While fetching inbox data') 
+  })
+
    }
 
 

@@ -16,7 +16,7 @@
     ],
     "applications": {
       "gecko": {
-        "id": "stackzilla5@mozilla.org"
+        "id": "stackzilla8@mozilla.org"
       }
     },
     "browser_action": {
@@ -29,9 +29,12 @@
           "background/authorize.js",
           "background/main.js",
           "background/inboxInfo.js",
-          "background/notificationInfo.js"
+          "background/notificationInfo.js",
+          "background/axios.js"
+          
         ]
       },
+      
     "content_scripts": [
       {
         "matches": ["*://*/*"],

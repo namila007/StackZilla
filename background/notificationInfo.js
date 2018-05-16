@@ -2,29 +2,28 @@ function notifynotiunread(count) {
     browser.notifications.create({
       "type": "basic",
       "iconUrl": browser.extension.getURL("icons/addon.png"),          
-      "title": "Notifications",
-      "message": "You have "+count+" unread Notifications"
+      "title": "Reputation Changes",
+      "message": "You have "+count+" reputation change events"
+
     })
   }
 
 
 function unreadnotificatons(token){
   var url = NOTIFICATIONS+`&access_token=${token}`
-    console.log(url)
 
-    return new Promise((resolve,reject)=>{
-        get(url, (msg1)=>{
-            console.log(msg1)
-            let msg = JSON.parse(msg1)  
-            console.log(msg.items.length) 
-            if(notiunread < msg.items.length ){
-                notifynotiunread(msg.items.length)
-                notiunread = msg.items.length
-                resolve(msg.items.length)
-            }
-            
-        })
-    })
-           
+    return axios.get(url).then(res=>{
+        
+        if(notiunread < res.data.items.length )
+        {   console.log(notiunread+" n "+res.data.items.length )
+            notiunread = res.data.items.length
+            return Promise.resolve(res.data.items.length)
+        }
+        if(notiunread == res.data.items.length ){
+            console.log(notiunread+" n "+res.data.items.length )
+            return Promise.resolve(-1)
+        }
+        throw new Error('Error occured While fetching notification data') 
+      })           
 }
 
