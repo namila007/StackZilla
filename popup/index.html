@@ -1,3 +1,41 @@
-<html  >
-    Hello
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    </head>
+
+<body>
+  <div class="container-fluid">
+  <div id="popup-content row" class="row">
+    <div class="col-sm col-md">
+        <button type="button" class="btn btn-info small" id="tokenbtn">Get Token</button> 
+    </div>
+    <div class="token" id="token"></div>
+    <div class="col user">
+    </div>
+  </div>
+
+  <div class="row" id="main_inbox" >
+    <div class="col-12">
+      <button type="button" class="btn btn-primary" id="showinboxbtn">
+          Inbox <span class="badge badge-light" id="unreadinboxcount"></span>
+          <span class="sr-only">Unread Messages</span>
+      </button>
+    </div>
+    <div class="col-12">
+        <ul id="inbox" style="visibility: hidden;"></ul>
+    </div>
+   
+  </div>
+
+</div>
+  
+
+  <script type='text/javascript' src="scripts/jquery-3.3.1.min.js"></script>
+  <script src="stackpopup.js"></script>
+</body>
+
+
 </html>
