@@ -3,12 +3,21 @@
 var token
 var totunread = 0
 var notiunread = 0
+var interval;
 
-const INBOX_READ =
+const INBOX_UNREAD =
 `https://api.stackexchange.com/2.2/me/inbox/unread?key=${KEY}&site=stackoverflow&filter=!0UscT51V)r-XJhlOHzduuQu)O`
 
+const INBOX =
+`https://api.stackexchange.com/2.2/me/inbox?key=${KEY}&site=stackoverflow&pagesize=5&filter=!8IfPpxGro.Z6_M(hOhkHW`
+
+
 const NOTIFICATIONS = 
-`https://api.stackexchange.com/2.2/me/reputation?site=stackoverflow&key=${KEY}`
+`https://api.stackexchange.com/2.2/me/notifications/unread?site=stackoverflow&key=${KEY}&pagesize=5&filter=!w*yCRQ_T5l9PdmgVXW`
+
+const BADGEUPDATES = 
+`https://api.stackexchange.com/2.2/me/notifications?site=stackoverflow&key=${KEY}&pagesize=5&filter=!w*yCRQ_T5l9PdmgVXW`
+
 
 //error noti
 function notifyerror(error) {
@@ -29,19 +38,38 @@ function logError(error) {
   //notifyerror(error)
 }
 
+async function messageHandle (request, sender, sendResponse) {
+  if(request.command == "getToken"){
+    console.log("CLICKED")
+    token = await getAccessToken()
+    console.log("tok "+token)
+    unreadnotificatons(token).then(notifynotiunread).catch(logError)
+    unreadmessages(token).then(notifyunread).catch(logError)
+    badge()
+    clearInterval(interval)
+    startInterval() 
+    inbox(token).then(res=>{
+      console.log("mmmm "+res)
+      sendResponse({data: res})
+    })
+  }
+  return true
+ 
+  
+}
 
-browser.browserAction.onClicked.addListener(async function() {
-  console.log("CLICKED")
-  token = await getAccessToken()
-  console.log("tok "+token)
-  unreadnotificatons(token).then(notifynotiunread).catch(logError)
-  unreadmessages(token).then(notifyunread).catch(logError)
-  badge()
-  startInterval()
-})
+// browser.browserAction.onClicked.addListener(async function() {
+//   console.log("CLICKED")
+//   token = await getAccessToken()
+//   console.log("tok "+token)
+//   unreadnotificatons(token).then(notifynotiunread).catch(logError)
+//   unreadmessages(token).then(notifyunread).catch(logError)
+//   badge()
+//   startInterval()
+// })
 
 function startInterval(){
-var interval = setInterval(function(){
+ interval = setInterval(function(){
   unreadnotificatons(token)
     .then((val)=>{
       if(val!=-1){notifynotiunread}})
@@ -56,8 +84,10 @@ var interval = setInterval(function(){
 function badge() {
   if((totunread+notiunread)>0)
   {
-    browser.browserAction.setBadgeText({text: (totunread+notiunread).toString()});
+    browser.browserAction.setBadgeText({text: (totunread).toString()});
   }
 }
+
+browser.runtime.onMessage.addListener(messageHandle);
 
 

@@ -4,37 +4,39 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    </head>
+  </head>
 
 <body>
-  <div class="container-fluid">
-  <div id="popup-content row" class="row">
-    <div class="col-sm col-md">
-        <button type="button" class="btn btn-info small" id="tokenbtn">Get Token</button> 
-    </div>
-    <div class="token" id="token"></div>
-    <div class="col user">
-    </div>
-  </div>
+ 
 
-  <div class="row" id="main_inbox" >
-    <div class="col-12">
-      <button type="button" class="btn btn-primary" id="showinboxbtn">
-          Inbox <span class="badge badge-light" id="unreadinboxcount"></span>
-          <span class="sr-only">Unread Messages</span>
-      </button>
-    </div>
-    <div class="col-12">
-        <ul id="inbox" style="visibility: hidden;"></ul>
-    </div>
+  <div class="jumbotron jumbotron-fluid">
+      <h3 class="display-4">StackZilla</h3>
+      <hr class="my-4">
+      <div class="row" id="main_inbox" >
+          <div class="col-12">
+            <button type="button" class="btn btn-primary" id="showinboxbtn">
+                Inbox <span class="badge badge-light" id="unreadinboxcount"></span>
+                <span class="sr-only">Unread Messages</span>
+            </button>
+          </div>
+          <div class="col-12" id="inboxdiv" style="visibility: hidden;">
+              <div class="list-group" id="messages">
+                  <a href="#" class="list-group-item list-group-item-action active">
+                    Cras justo odio
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                  <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                  <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                  <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+                </div>
+          </div>
+  </div>
    
-  </div>
-
-</div>
+  
   
 
   <script type='text/javascript' src="scripts/jquery-3.3.1.min.js"></script>
-  <script src="stackpopup.js"></script>
+  <script src="popup.js"></script>
 </body>
 
 

@@ -1,0 +1,27 @@
+{
+  "name": "stackzilla",
+  "version": "1.0.0",
+  "description": "namila007@gmail.com Namila Bandara namila007 IA1",
+  "main": "index.js",
+  "dependencies": {
+    "web-ext": "^2.6.0",
+    "babel-eslint": "^7.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namila007/StackZilla.git"
+  },
+  "author": "Namila Bandara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/namila007/StackZilla/issues"
+  },
+  "homepage": "https://github.com/namila007/StackZilla#readme"
+}

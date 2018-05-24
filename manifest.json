@@ -22,7 +22,8 @@
     "browser_action": {
         "default_icon": "icons/toolbar.png",
         "default_title": "StackZilla",
-        "browser_style": true
+        "browser_style": true,
+        "default_popup": "popup/index.html"
       },
       "background": {
         "scripts": [
@@ -30,15 +31,14 @@
           "background/main.js",
           "background/inboxInfo.js",
           "background/notificationInfo.js",
-          "background/axios.js"
-          
+          "background/axios.js"    
         ]
       },
       
     "content_scripts": [
       {
         "matches": ["*://*/*"],
-        "js": ["popup/stackpopup.js"]
+        "js": ["popup/popup.js"]
       }
     ],
     "options_ui": {
